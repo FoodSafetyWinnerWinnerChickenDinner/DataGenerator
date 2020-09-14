@@ -1,2 +1,3 @@
 # FoodSafety
-Food safety Korea contest
+
+식품안전나라 공모전.
