@@ -70,11 +70,22 @@ public class FoodSafetyData {
                 bw = Files.newBufferedWriter(Paths.get(outputPath), Charset.forName("UTF-8"));
                 StringBuilder make = new StringBuilder();
 
-                for (FoodDefinition fd : foods) {
-                    make.append(fd.name).append(fd.region).append(fd.brand);
-                    make.append(fd.total).append(fd.type);
-                    make.append(fd.kcal).append(fd.car).append(fd.pro).append(fd.fat);
-                    make.append(fd.sug).append(fd.nat).append(fd.cho).append(fd.satFat).append(fd.traFat);
+                String[][] components = new String[foods.length][14];
+                for(int i = 0; i < foods.length; i++) {
+                    FoodDefinition current = foods[i];
+
+                    components[i][0] = current.name; components[i][1] = current.region; components[i][2] = current.brand;
+                    components[i][3] = current.total; components[i][4] = current.type;
+                    components[i][5] = current.kcal; components[i][6] = current.car; components[i][7] = current.pro;
+                    components[i][8] = current.fat;
+                    components[i][9] = current.sug; components[i][10] = current.nat; components[i][11] = current.cho;
+                    components[i][12] = current.satFat; components[i][13] = current.traFat;
+                }
+
+                for (String[] str : components) {
+                    for(String data: str) {
+                        make.append(data).append(SEMI_COLON);
+                    }
 
                     make.append(NEW_LINE).append(NEW_LINE);
                 }
@@ -174,7 +185,7 @@ public class FoodSafetyData {
             valueBuilder.append(chars[x]);
         }
 
-        build.append(valueBuilder.toString()).append(SEMI_COLON);
+        build.append(valueBuilder.toString());
     }
 
     private static void extract(int start, char[] chars) {
@@ -184,6 +195,6 @@ public class FoodSafetyData {
             valueBuilder.append(chars[x]);
         }
 
-        build.append(valueBuilder.toString()).append(SEMI_COLON);
+        build.append(valueBuilder.toString());
     }
 }
